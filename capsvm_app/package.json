@@ -1,0 +1,39 @@
+{
+    "name": "capsvm_desktop_app",
+    "version": "1.0.0",
+    "description": "Provide a client interface for Capsvm",
+    "main": "main.js",
+    "contributors": [
+        {
+            "name" : "Soutric Tanguy",
+            "email" : "tanguy.soutric@gmail.com"
+        },
+        {
+            "name" : "Gitton Julien",
+            "email" : "gitton.jln@gmail.com"
+        }
+    ],
+    "license": "CapsOS",
+    "devDependencies": {
+        "electron": "^31.2.0",
+        "electron-builder": "^22.14.13"
+    },
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-builder",
+        "clean": "rm -rf dist"
+    },
+    "build": {
+        "appId": "com.example.helloworld",
+        "productName": "HelloWorld",
+        "win": {
+            "target": "nsis"
+        },
+        "mac": {
+            "target": "dmg"
+        },
+        "linux": {
+            "target": "AppImage"
+        }
+    }
+}
