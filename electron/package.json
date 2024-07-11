@@ -2,21 +2,21 @@
     "name": "capsvm_desktop_app",
     "version": "1.0.0",
     "description": "Provide a client interface for Capsvm",
-    "main": "main.js",
+    "main": "js/main.js",
     "contributors": [
         {
-            "name" : "Soutric Tanguy",
-            "email" : "tanguy.soutric@gmail.com"
+            "name": "Soutric Tanguy",
+            "email": "tanguy.soutric@gmail.com"
         },
         {
-            "name" : "Gitton Julien",
-            "email" : "gitton.jln@gmail.com"
+            "name": "Gitton Julien",
+            "email": "gitton.jln@gmail.com"
         }
     ],
     "license": "CapsOS",
     "devDependencies": {
         "electron": "^31.2.0",
-        "electron-builder": "^22.14.13"
+        "electron-builder": "^24.13.3"
     },
     "scripts": {
         "start": "electron .",
@@ -24,8 +24,8 @@
         "clean": "rm -rf dist"
     },
     "build": {
-        "appId": "com.example.helloworld",
-        "productName": "HelloWorld",
+        "appId": "com.example.capsvmApp",
+        "productName": "capsvm_desktop_app",
         "win": {
             "target": "nsis"
         },
@@ -35,5 +35,8 @@
         "linux": {
             "target": "AppImage"
         }
+    },
+    "dependencies": {
+        "better-sqlite3": "^11.1.2"
     }
 }
