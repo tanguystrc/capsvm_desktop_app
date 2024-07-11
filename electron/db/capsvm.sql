@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS server (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    ip TEXT NOT NULL,
+    user TEXT NOT NULL,
+    password TEXT NOT NULL
+);

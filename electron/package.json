@@ -2,7 +2,7 @@
     "name": "capsvm_desktop_app",
     "version": "1.0.0",
     "description": "Provide a client interface for Capsvm",
-    "main": "main.js",
+    "main": "js/main.js",
     "contributors": [
         {
             "name": "Soutric Tanguy",
@@ -24,8 +24,8 @@
         "clean": "rm -rf dist"
     },
     "build": {
-        "appId": "com.example.helloworld",
-        "productName": "HelloWorld",
+        "appId": "com.example.capsvmApp",
+        "productName": "capsvm_desktop_app",
         "win": {
             "target": "nsis"
         },
