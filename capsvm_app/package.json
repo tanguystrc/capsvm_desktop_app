@@ -5,18 +5,18 @@
     "main": "main.js",
     "contributors": [
         {
-            "name" : "Soutric Tanguy",
-            "email" : "tanguy.soutric@gmail.com"
+            "name": "Soutric Tanguy",
+            "email": "tanguy.soutric@gmail.com"
         },
         {
-            "name" : "Gitton Julien",
-            "email" : "gitton.jln@gmail.com"
+            "name": "Gitton Julien",
+            "email": "gitton.jln@gmail.com"
         }
     ],
     "license": "CapsOS",
     "devDependencies": {
         "electron": "^31.2.0",
-        "electron-builder": "^22.14.13"
+        "electron-builder": "^24.13.3"
     },
     "scripts": {
         "start": "electron .",
@@ -35,5 +35,8 @@
         "linux": {
             "target": "AppImage"
         }
+    },
+    "dependencies": {
+        "better-sqlite3": "^11.1.2"
     }
 }

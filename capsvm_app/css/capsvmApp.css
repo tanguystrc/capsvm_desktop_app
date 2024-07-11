@@ -1,0 +1,48 @@
+all{
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+
+.aside{
+    background-color: #f1f1f1;
+    width: 15vw;
+    display:flex;
+    flex-direction: column;
+    height: 100vh;
+    min-width: 175px;
+}
+
+.servers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    border-bottom: 1px solid #ccc;
+}
+
+.servname{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:x-large;
+    font-weight: bold;
+    width: 70%;
+    border: 2px solid black;
+    height: 100%;
+}
+
+.burger{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    font:lighter;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+}
