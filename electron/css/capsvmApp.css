@@ -1,0 +1,98 @@
+all{
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.aside{
+    background-color: #f1f1f1;
+    width: 15vw;
+    min-width: 175px;
+    display:flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.servers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    border-bottom: 1px solid #ccc;
+}
+
+.servname{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:x-large;
+    font-weight: bold;
+    width: 70%;
+    height: 100%;
+}
+
+.burger{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    font:lighter;
+    justify-content: center;
+    align-items: center;
+    padding-right:4vh;
+}
+
+.menu {
+    position: absolute;
+    top: 10vh;
+    display: none;
+    left:0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    width: 25vh;
+    z-index: 1;
+}
+
+
+
+.menu::-webkit-scrollbar {
+    display: none;
+}
+
+.menu.active {
+    display: block;
+    max-height: 30vh;
+    overflow-y: auto;
+}
+
+.vms{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ccc;
+    max-height: 4vh;
+    margin-right: 2vh;
+    margin-left: 2vh;
+    border-radius: 3px;
+}
+
+.input{
+    border: 0;
+    height: 4vh;
+}

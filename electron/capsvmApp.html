@@ -1,14 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Capsvm Desktop App</title>
-</head>
-<body>
-    <h1>Hello world</h1>
-
-    <div id="server_info"></div>
-    <script src="js/renderer.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/capsvmApp.css" />
+        <link rel="stylesheet" href="./css/hamburgers.css" />
+        <title>Capsvm Desktop App</title>
+    </head>
+    <body>
+        <div class="aside">
+            <div class="servers">
+                <div class="servname">
+                    Serveur
+                </div>
+                <div class="burger">
+                    <button id="ham" class="hamburger hamburger--slider" type="button">
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </button>  
+                </div>
+            </div>
+            <div class="menu">
+                
+            </div>
+            <div class="vms">
+                <div class="search">
+                    <input class="input" type="text" placeholder="Rechercher une VM" />
+                </div>
+                <div class="vmlist">
+                </div>
+            </div>
+        <div class="main"></div>
+        <div id="server_info"> </div>
+    </body>
+    <script src="./js/renderer.js"></script>
 </html>
