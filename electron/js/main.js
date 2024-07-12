@@ -1,16 +1,26 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const Database = require('better-sqlite3');
+const fs = require('fs');
 const path = require('path');
 
-const dbPath = path.join(__dirname, '../db/capsvm.sqlite');
-let db;
+const dbPath = path.join(app.getAppPath(), 'capsvm.sqlite');
 
-try {
-    db = new Database(dbPath, { verbose: console.log });
-    console.log('Database initialized successfully.');
-  } catch (error) {
-    console.error('Error initializing database:', error);
+/*
+const dbPath = path.join(app.getPath('userData'), 'capsvm.sqlite');
+
+if (!fs.existsSync(dbPath)) {
+  const sourceDbPath = path.join(app.getAppPath(), 'capsvm.sqlite');
+  
+  try {
+    fs.copyFileSync(sourceDbPath, dbPath);
+  } catch (err) {
+    console.error('Erreur lors de la copie de la base de données :', err);
   }
+}
+*/
+
+const db = new Database(dbPath);
+
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
