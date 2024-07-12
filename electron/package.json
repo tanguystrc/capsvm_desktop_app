@@ -1,52 +1,53 @@
 {
-  "name": "capsvm_desktop_app",
-  "version": "1.0.0",
-  "description": "Provide a client interface for Capsvm",
-  "main": "js/main.js",
-  "author": "",
-  "contributors": [
-    "Soutric Tanguy <tanguy.soutric@gmail.com>",
-    "Gitton Julien <gitton.jln@gmail.com>"
-  ],
-  "license": "CapsOS",
-  "devDependencies": {
-    "electron": "^31.2.0",
-    "electron-builder": "^24.13.3"
-  },
-  "scripts": {
-    "start": "electron .",
-    "build": "electron-builder",
-    "clean": "rm -rf dist"
-  },
-  "build": {
-    "appId": "com.example.capsvmApp",
-    "productName": "capsvm_desktop_app",
-    "directories": {
-      "output": "dist"
-    },
-    "files": [
-      "js/**/*",
-      "img/**/*",
-      "index.html",
-      "package.json",
-      "capsvm.sqlite"
+    "name": "capsvm_desktop_app",
+    "version": "1.0.0",
+    "description": "Provide a client interface for Capsvm",
+    "main": "js/main.js",
+    "author": "",
+    "contributors": [
+        "Soutric Tanguy <tanguy.soutric@gmail.com>",
+        "Gitton Julien <gitton.jln@gmail.com>"
     ],
-    "win": {
-      "target": "nsis",
-      "icon": "img/logo.ico"
+    "license": "CapsOS",
+    "devDependencies": {
+        "electron": "^31.2.0",
+        "electron-builder": "^24.13.3"
     },
-    "mac": {
-      "target": "dmg",
-      "icon": "img/logo.icns"
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-builder",
+        "clean": "rm -rf dist"
     },
-    "linux": {
-      "target": "AppImage",
-      "category": "Utility",
-      "icon": "img/logo.png"
-    }
-  },
-  "dependencies": {
-    "better-sqlite3": "^11.1.2"
-  },
-  "keywords": []
+    "build": {
+        "appId": "com.example.capsvmApp",
+        "productName": "capsvm_desktop_app",
+        "directories": {
+            "output": "dist"
+        },
+        "files": [
+            "js/**/*",
+            "img/**/*",
+            "capsvmApp.html",
+            "package.json",
+            "capsvm.sqlite",
+            "node_modules/**/*"
+        ],
+        "win": {
+            "target": "nsis",
+            "icon": "img/logo.ico"
+        },
+        "mac": {
+            "target": "dmg",
+            "icon": "img/logo.icns"
+        },
+        "linux": {
+            "target": "AppImage",
+            "category": "Utility",
+            "icon": "img/logo.png"
+        }
+    },
+    "dependencies": {
+        "better-sqlite3": "^11.1.2"
+    },
+    "keywords": []
 }
