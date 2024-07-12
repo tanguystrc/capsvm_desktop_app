@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const Database = require('better-sqlite3');
 const path = require('path');
 
-const dbPath = path.join(__dirname, '../capsvm.sqlite');
+const dbPath = path.join(__dirname, '../db/capsvm.sqlite');
 let db;
 
 try {
