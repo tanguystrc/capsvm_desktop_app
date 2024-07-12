@@ -1,42 +1,52 @@
 {
-    "name": "capsvm_desktop_app",
-    "version": "1.0.0",
-    "description": "Provide a client interface for Capsvm",
-    "main": "js/main.js",
-    "contributors": [
-        {
-            "name": "Soutric Tanguy",
-            "email": "tanguy.soutric@gmail.com"
-        },
-        {
-            "name": "Gitton Julien",
-            "email": "gitton.jln@gmail.com"
-        }
+  "name": "capsvm_desktop_app",
+  "version": "1.0.0",
+  "description": "Provide a client interface for Capsvm",
+  "main": "js/main.js",
+  "author": "",
+  "contributors": [
+    "Soutric Tanguy <tanguy.soutric@gmail.com>",
+    "Gitton Julien <gitton.jln@gmail.com>"
+  ],
+  "license": "CapsOS",
+  "devDependencies": {
+    "electron": "^31.2.0",
+    "electron-builder": "^24.13.3"
+  },
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "clean": "rm -rf dist"
+  },
+  "build": {
+    "appId": "com.example.capsvmApp",
+    "productName": "capsvm_desktop_app",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "js/**/*",
+      "img/**/*",
+      "index.html",
+      "package.json",
+      "capsvm.sqlite"
     ],
-    "license": "CapsOS",
-    "devDependencies": {
-        "electron": "^31.2.0",
-        "electron-builder": "^24.13.3"
+    "win": {
+      "target": "nsis",
+      "icon": "img/logo.ico"
     },
-    "scripts": {
-        "start": "electron .",
-        "build": "electron-builder",
-        "clean": "rm -rf dist"
+    "mac": {
+      "target": "dmg",
+      "icon": "img/logo.icns"
     },
-    "build": {
-        "appId": "com.example.capsvmApp",
-        "productName": "capsvm_desktop_app",
-        "win": {
-            "target": "nsis"
-        },
-        "mac": {
-            "target": "dmg"
-        },
-        "linux": {
-            "target": "AppImage"
-        }
-    },
-    "dependencies": {
-        "better-sqlite3": "^11.1.2"
+    "linux": {
+      "target": "AppImage",
+      "category": "Utility",
+      "icon": "img/logo.png"
     }
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.1.2"
+  },
+  "keywords": []
 }
