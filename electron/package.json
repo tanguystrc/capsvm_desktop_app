@@ -47,7 +47,9 @@
         }
     },
     "dependencies": {
-        "better-sqlite3": "^11.1.2"
+        "better-sqlite3": "^11.1.2",
+        "_comment" : "npm install -g @electron/rebuild + electron-rebuild -f -w better-sqlite3 --module-dir .",
+        "electron-log": "^4.4.8"
     },
     "keywords": []
 }
