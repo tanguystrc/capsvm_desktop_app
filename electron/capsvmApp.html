@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="menu">
-                
+                <div class="server addServer">Add a server</div>
             </div>
             <div class="vms">
                 <div class="search">
@@ -32,6 +32,34 @@
                 </div>
             </div>
         <div class="main"></div>
+        <div class="addServerPopup">
+            <form class="newServerInfo">
+                <div>
+                    <fieldset>
+                        <legend>Server name</legend>
+                        <input type="text" id="serverName" name="serverName" required>
+                    </fieldset>
+    
+                    <fieldset>
+                        <legend>Server IP</legend>
+                        <input type="text" id="serverIp" name="serverIp" required>
+                    </fieldset>
+    
+                    <fieldset>
+                        <legend>Username</legend>
+                        <input type="text" id="serverUsername" name="serverUsername" required>
+                    </fieldset>
+    
+                    <fieldset>
+                        <legend>password</legend>
+                        <input type="password" id="serverPassword" name="serverPassword" required>
+                    </fieldset>
+    
+                </div>
+                
+                <input class ="result" type="submit" name="submit" id="submit" value="Add">
+            </form>
+        </div>
     </body>
     <script src="./js/renderer.js"></script>
 </html>

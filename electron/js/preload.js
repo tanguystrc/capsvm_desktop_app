@@ -4,9 +4,9 @@ contextBridge.exposeInMainWorld("sqlite_server", {
     getServers: () => ipcRenderer.send("get-server"),
     onServersGet: (callback) =>
         ipcRenderer.on("get-server-reply", (event, arg) => callback(arg)),
-    setServer: (server) => ipcRenderer.send("set-server", server),
-    onServerSet: (callback) =>
-        ipcRenderer.on("set-server-reply", (event, arg) => callback(arg)),
+    addServer: (name, ip, username, password) => ipcRenderer.send("add-server", { name, ip, username, password }),
+    onServerAdd: (callback) =>
+        ipcRenderer.on("add-server-reply", (event, arg) => callback(arg)),
 });
 
 contextBridge.exposeInMainWorld('get_server_status', {
@@ -16,7 +16,6 @@ contextBridge.exposeInMainWorld('get_server_status', {
             return response;
         } catch (error) {
             console.error('Erreur lors de l\'appel à send-post-request  : ', error);
-            console.error('Server URL:', serverUrl);
             throw error;
         }
     }

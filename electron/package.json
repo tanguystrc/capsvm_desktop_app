@@ -27,6 +27,7 @@
         "files": [
             "js/**/*",
             "img/**/*",
+            "css/**/*",
             "capsvmApp.html",
             "package.json",
             "capsvm.sqlite",

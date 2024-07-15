@@ -21,6 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 const tooltip = document.createElement("div");
                 tooltip.className = "tooltip";
+                tooltip.innerHTML = "Trying to connect";
                 status.appendChild(tooltip);
 
                 const token = btoa(server.user + ":" + server.password);
@@ -61,4 +62,19 @@ async function getServerStatus(serverUrl, combinedToken, status, tooltip) {
 document.querySelector('#ham').addEventListener('click', function() {
     this.classList.toggle('is-active');
     document.querySelector('.menu').classList.toggle('active');
+});
+
+document.querySelector(".addServer").addEventListener('click', function() {
+    document.querySelector(".addServerPopup").style.display = "block";
+});
+
+document.querySelector(".newServerInfo").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const serverName = document.querySelector('input[name="serverName"]').value;
+    const serverIp = document.querySelector('input[name="serverIp"]').value;
+    const serverUsername = document.querySelector('input[name="serverUsername"]').value;
+    const serverPassword = document.querySelector('input[name="serverPassword"]').value;
+
+    window.sqlite_server.addServer(serverName, serverIp, serverUsername, serverPassword);
 });

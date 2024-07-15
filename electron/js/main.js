@@ -1,4 +1,4 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const { app, BrowserWindow, ipcMain, net } = require("electron");
 const Database = require("better-sqlite3");
@@ -67,45 +67,47 @@ ipcMain.on("get-server", (event, arg) => {
     }
 });
 
-// Set server information
-ipcMain.on("set-server", (event, arg) => {
+ipcMain.handle(
+    "send-post-request",
+    async (event, serverUrl, endpoint, combinedToken) => {
+        return new Promise((resolve, reject) => {
+            const postData = "";
+
+            const options = {
+                hostname: serverUrl,
+                port: 443,
+                path: endpoint,
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    Authorization: "Basic " + combinedToken,
+                    "Content-Length": Buffer.byteLength(postData),
+                },
+            };
+
+            const req = https.request(options, (res) => {
+                const statusCode = res.statusCode;
+                resolve({ statusCode });
+            });
+
+            req.on("error", (error) => {
+                reject(error);
+            });
+
+            req.write(postData);
+            req.end();
+        });
+    }
+);
+
+ipcMain.on("add-server", (event, arg) => {
     try {
         db.prepare(
-            "UPDATE server SET name = ?, url = ?, token = ? WHERE id = 1"
-        ).run(arg.name, arg.url, arg.token);
-        event.reply("set-server-reply", { success: true });
-    } catch (err) {
-        console.error(err.message);
-        event.reply("set-server-reply", { error: err.message });
+            "INSERT INTO server (name, ip, user, password) VALUES (?, ?, ?, ?)"
+        ).run(arg.name, arg.ip, arg.username, arg.password);
+        event.reply("add-server-reply", {success: true});
+    } catch(err) {
+      console.error(err.message);
+      event.reply("add-server-reply", { error: err.message });
     }
-});
-
-ipcMain.handle('send-post-request', async (event, serverUrl, endpoint, combinedToken) => {
-    return new Promise((resolve, reject) => {
-        const postData = "";
-
-        const options = {
-            hostname: serverUrl,
-            port: 443,
-            path: endpoint,
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                Authorization: "Basic " + combinedToken,
-                "Content-Length": Buffer.byteLength(postData),
-            },
-        };
-
-        const req = https.request(options, (res) => {
-          const statusCode = res.statusCode;
-          resolve({ statusCode });
-      });
-
-        req.on("error", (error) => {
-            reject(error);
-        });
-
-        req.write(postData);
-        req.end();
-    });
 });
