@@ -1,5 +1,3 @@
-console.log('renderer.js');
-
 window.addEventListener('DOMContentLoaded', () => {
     window.sqlite_server.getServers();
     window.sqlite_server.onServersGet((data) => {
