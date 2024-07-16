@@ -21,8 +21,8 @@ body {
     min-width: 175px;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    position: relative;
+    height: 100%;
+    flex-shrink: 0; /* Empêche le rétrécissement */
 }
 
 .servers {
@@ -58,10 +58,12 @@ body {
     display: none;
     left: 0;
     max-height: 0;
+    overflow: hidden;
     transition: max-height 0.3s ease-out;
     background-color: #f0f0f0;
-    border-top: 1px solid #ccc;
-    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    width: 25vh;
     z-index: 1;
 }
 
@@ -72,6 +74,7 @@ body {
 .menu.active {
     display: block;
     max-height: 30vh;
+    overflow-y: auto;
 }
 
 .server {
@@ -82,6 +85,26 @@ body {
     min-height: 40px;
     border-bottom: 1px solid #ccc;
     transition: background-color 0.3s ease-out;
+}
+
+.vms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    padding: 10px;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4vh;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+    width: 100%;
+    border-radius: 3px;
 }
 
 .addServer {
@@ -136,15 +159,14 @@ body {
     display: block;
 }
 
-.vms{
+.vms {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
 
-.search{
+.search {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -158,7 +180,9 @@ body {
 
 .input {
     border: 0;
-    height: 4vh;
+    height: 100%;
+    width: 100%;
+    padding: 0 10px;
 }
 
 .addServerPopup {
@@ -197,4 +221,101 @@ form fieldset {
     width: fit-content;
     margin-top: 2vh;
     cursor: pointer;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    width: calc(100% - 15vw); /* Ajuste la largeur pour tenir compte de la largeur de la barre latérale */
+    height: 100%;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    height: 100%;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    overflow-y: auto;
+    flex-shrink: 0; /* Empêche le rétrécissement */
+}
+
+.text {
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.action-button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-button:hover {
+    background-color: #0056b3;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 25vw); /* Ajuste la largeur pour tenir compte de la largeur de la section actions */
+    height: 100%;
+    background-color: cyan;
+    overflow-y: auto;
+}
+
+.options {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 10vh;
+    background-color: yellow;
+    padding: 10px;
+}
+
+.option-button {
+    padding: 5px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px; /* espace entre les boutons */
+}
+
+.option-button:last-child {
+    margin-right: 0; /* pas de marge après le dernier bouton */
+}
+
+.option-button img {
+    width: 24px;
+    height: 24px;
+}
+
+.vnc {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
+    height: 100%;
+}
+
+.term {
+    width: 70%;
+    height: 70%;
+    background-color: #f1f1f1;
+}
+
+img {
+    background-color: transparent;
 }

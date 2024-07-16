@@ -56,9 +56,7 @@
     bottom: -10px; }
 
 
-/*
-   * Slider
-   */
+
 .hamburger--slider .hamburger-inner {
   top: 2px; }
   .hamburger--slider .hamburger-inner::before {
