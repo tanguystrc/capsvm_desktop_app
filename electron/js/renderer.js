@@ -75,6 +75,7 @@ document.querySelector(".newServerInfo").addEventListener("submit", function(eve
     const serverIp = document.querySelector('input[name="serverIp"]').value;
     const serverUsername = document.querySelector('input[name="serverUsername"]').value;
     const serverPassword = document.querySelector('input[name="serverPassword"]').value;
+    document.querySelector(".addServerPopup").style.display = "none";
 
     window.sqlite_server.addServer(serverName, serverIp, serverUsername, serverPassword);
 });
