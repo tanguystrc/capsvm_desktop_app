@@ -32,15 +32,16 @@
   width: 40px;
   height: 24px;
   display: inline-block;
-  position: relative; }
+  position: relative; 
+  }
 
 .hamburger-inner {
   display: block;
   top: 50%;
   margin-top: -2px; }
   .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
-    width: 35px;
-    height: 3px;
+    width: 30px;
+    height: 2px;
     background-color: #000;
     border-radius: 4px;
     position: absolute;

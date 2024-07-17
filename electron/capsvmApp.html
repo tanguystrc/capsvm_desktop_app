@@ -1,86 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="./css/capsvmApp.css" />
-        <link rel="stylesheet" href="./css/hamburgers.css" />
-        <title>Capsvm Desktop App</title>
-    </head>
-    <body>
-        <div class="aside">
-            <div class="servers">
-                <div class="servname">
-                    Serveur
-                </div>
-                <div class="burger">
-                    <button id="ham" class="hamburger hamburger--slider" type="button">
-                        <span class="hamburger-box">
-                            <span class="hamburger-inner"></span>
-                        </span>
-                    </button>  
-                </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/capsvmApp.css" />
+    <link rel="stylesheet" href="./css/hamburgers.css" />
+    <title>Capsvm Desktop App</title>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="aside">
+        <div class="servers">
+            <div class="servname">
+                No server connected
             </div>
-            <div class="menu">
-                <div class="server addServer">Add a server</div>
-            </div>
-            <div class="vms">
-                <div class="search">
-                    <input class="input" type="text" placeholder="Rechercher une VM" />
-                </div>
-                <div class="vmlist"></div>
+            <div class="burger">
+                <button id="ham" class="hamburger hamburger--slider" type="button">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
             </div>
         </div>
-        <div class="main">
-            <div class="actions">
-                <div class="text">
-                    <p>Boutons pour VMs :</p>
-                </div>
-                <div class="buttons">
-                    <button class="action-button">Action 1</button>
-                    <button class="action-button">Action 2</button>
-                </div>
+        <div class="menu">
+            <div class="server addServer" onclick="showPopup()">Add a server</div>
+        </div>
+        <div class="vms">
+            <div class="search">
+                <input class="input" type="text" placeholder="Search a VM" id="searchInput" />
+                <img src="./img/search_icon.png" alt="Search" class="search-icon" id="searchIcon">
             </div>
-            <div class="right">
-                <div class="options">
-                    <button class="option-button">
-                        <img src="img/moon.png" alt="Button 1">
-                    </button>
-                    <button class="option-button">
-                        <img src="img/setting-128_black.png" alt="Button 2">
-                    </button>
-                </div>
-                <div class="vnc">
-                    <div class="term"></div>
-                </div>
+            <div class="vmlist"></div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="actions">
+            <div class="text">
+                <p>VM</p>
             </div>
-            <div class="addServerPopup">
-                <form class="newServerInfo">
-                    <div>
-                        <fieldset>
-                            <legend>Server name</legend>
-                            <input type="text" id="serverName" name="serverName" required>
-                        </fieldset>
-        
-                        <fieldset>
-                            <legend>Server IP</legend>
-                            <input type="text" id="serverIp" name="serverIp" required>
-                        </fieldset>
-        
-                        <fieldset>
-                            <legend>Username</legend>
-                            <input type="text" id="serverUsername" name="serverUsername" required>
-                        </fieldset>
-        
-                        <fieldset>
-                            <legend>password</legend>
-                            <input type="password" id="serverPassword" name="serverPassword" required>
-                        </fieldset>
-                    </div>
-                    <input class ="result" type="submit" name="submit" id="submit" value="Add">
-                </form>
+            <div class="buttons">
+                <button class="action-button">Start</button>
+                <button class="action-button">Stop</button>
+                <button class="action-button">Status</button>
             </div>
         </div>
-    </body>
+        <div class="right">
+            <div class="options">
+                <button class="option-button theme">
+                    <img src="img/moon.png" alt="Theme">
+                </button>
+            </div>
+            <div class="vnc">
+                <div class="term"></div>
+            </div>
+        </div>
+        <div class="addServerPopup">
+            <form class="newServerInfo">
+                <div>
+                    <fieldset>
+                        <legend>Server name</legend>
+                        <input type="text" id="serverName" name="serverName" required>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Server IP</legend>
+                        <input type="text" id="serverIp" name="serverIp" required>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Username</legend>
+                        <input type="text" id="serverUsername" name="serverUsername" required>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>password</legend>
+                        <input type="password" id="serverPassword" name="serverPassword" required>
+                    </fieldset>
+                </div>
+                <input class="result" type="submit" name="submit" id="submit" value="Add">
+            </form>
+        </div>
+    </div>
     <script src="./js/renderer.js"></script>
+</body>
 </html>

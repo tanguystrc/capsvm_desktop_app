@@ -79,3 +79,34 @@ document.querySelector(".newServerInfo").addEventListener("submit", function(eve
 
     window.sqlite_server.addServer(serverName, serverIp, serverUsername, serverPassword);
 });
+
+
+function showPopup() {
+    document.querySelector('.overlay').classList.add('active');
+    document.querySelector('.addServerPopup').classList.add('active');
+}
+
+function hidePopup() {
+    document.querySelector('.overlay').classList.remove('active');
+    document.querySelector('.addServerPopup').classList.remove('active');
+}
+
+document.querySelector('.overlay').addEventListener('click', hidePopup);
+
+document.querySelector('.newServerInfo').addEventListener('submit', function(event) {
+    event.preventDefault();
+    hidePopup();
+});
+
+const themeButton = document.querySelector('.option-button.theme');
+themeButton.addEventListener('click', () => {
+    document.body.classList.toggle('light-theme');
+    const themeIcon = themeButton.querySelector('img');
+    if (document.body.classList.contains('light-theme')) {
+        themeIcon.src = 'img/sun.png'; // Change icon to sun for light theme
+        themeIcon.alt = 'Light Theme';
+    } else {
+        themeIcon.src = 'img/moon.png'; // Change icon back to moon for dark theme
+        themeIcon.alt = 'Dark Theme';
+    }
+});
