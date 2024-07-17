@@ -63,12 +63,10 @@ body {
     display: none;
     left: 0;
     max-height: 0;
-    overflow: hidden;
+    overflow-y: auto;
     transition: max-height 0.3s ease-out;
-    background-color: #3D3D3D;
-    padding: 10px;
-    border: 1px solid #555555;
-    width: 25vh;
+    background-color: #f0f0f0;
+    width: 15vw;
     z-index: 1;
 }
 
@@ -79,7 +77,6 @@ body {
 .menu.active {
     display: block;
     max-height: 30vh;
-    overflow-y: auto;
 }
 
 .server {
@@ -100,6 +97,22 @@ body {
     flex-grow: 1;
     padding: 10px;
     overflow: auto;
+}
+
+.vm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4vh;
+    border-bottom: 1px solid #ccc;
+    width: 15vw;
+    margin-top: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease-out;
+}
+
+.vm:hover {
+    background-color: grey;
 }
 
 .search {
@@ -151,7 +164,8 @@ body {
 .addServer {
     font-weight: bold;
     cursor: pointer;
-    color: #ffffff
+    color: #ffffff;
+    border-top: 1px solid #ccc;
 }
 
 .server:hover {

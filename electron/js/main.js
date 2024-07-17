@@ -68,7 +68,7 @@ ipcMain.on("get-server", (event, arg) => {
 });
 
 ipcMain.handle(
-    "send-post-request",
+    "status-request",
     async (event, serverUrl, endpoint, combinedToken) => {
         return new Promise((resolve, reject) => {
             const postData = "";
@@ -88,6 +88,45 @@ ipcMain.handle(
             const req = https.request(options, (res) => {
                 const statusCode = res.statusCode;
                 resolve({ statusCode });
+            });
+
+            req.on("error", (error) => {
+                reject(error);
+            });
+
+            req.write(postData);
+            req.end();
+        });
+    }
+);
+
+ipcMain.handle(
+    "send-post-request",
+    async (event, serverUrl, endpoint, combinedToken, postData) => {
+        return new Promise((resolve, reject) => {
+
+            const options = {
+                hostname: serverUrl,
+                port: 443,
+                path: endpoint,
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    Authorization: "Basic " + combinedToken,
+                    "Content-Length": Buffer.byteLength(postData),
+                },
+            };
+
+            const req = https.request(options, (res) => {
+                let data = "";
+                res.on("data", (chunk) => {
+                    data += chunk;
+                });
+
+                res.on("end", () => {
+                    const statusCode = res.statusCode;
+                    resolve({ statusCode, data });
+                });
             });
 
             req.on("error", (error) => {
