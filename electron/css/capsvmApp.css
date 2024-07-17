@@ -65,9 +65,9 @@ body {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-out;
-    background-color: #3D3D3D; /* Gris foncé */
+    background-color: #3D3D3D;
     padding: 10px;
-    border: 1px solid #555555; /* Gris moyen */
+    border: 1px solid #555555;
     width: 25vh;
     z-index: 1;
 }
@@ -88,9 +88,9 @@ body {
     align-items: center;
     height: 4vh;
     min-height: 40px;
-    border-bottom: 1px solid #555555; /* Gris moyen */
+    border-bottom: 1px solid #555555;
     transition: background-color 0.3s ease-out;
-    color: #FFFFFF; /* Blanc pour le texte */
+    color: #FFFFFF;
 }
 
 .vms {
@@ -107,7 +107,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 4vh;
-    background-color: #FFFFFF; /* Blanc */
+    background-color: #FFFFFF;
     margin-bottom: 10px;
     width: 100%;
     border-radius: 40%;
@@ -117,7 +117,7 @@ body {
 }
 
 .search:focus-within {
-    outline: #052cd8 2px solid; /* Rouge vif */
+    outline: #052cd8 2px solid;
 }
 
 .input {
@@ -155,7 +155,7 @@ body {
 }
 
 .server:hover {
-    background-color: #555555; /* Gris moyen */
+    background-color: #555555;
     cursor: pointer;
 }
 
@@ -181,7 +181,7 @@ body {
     min-width: 15px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 1px solid #000000; /* Noir */
+    border: 1px solid #000000;
     background-color: yellow;
 }
 
@@ -214,7 +214,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 4vh;
-    background-color: #FFFFFF; /* Blanc */
+    background-color: #FFFFFF;
     border-bottom: 1px solid #ccc;
     margin-bottom: 10px;
     width: 100%;
@@ -260,13 +260,13 @@ form fieldset {
 
 .result {
     display: block;
-    background-color: #052cd8; /* Rouge vif */
+    background-color: #052cd8;
     border-radius: 10px;
     padding: 1vh;
     width: fit-content;
     margin-top: 2vh;
     cursor: pointer;
-    color: #FFFFFF; /* Blanc pour le texte */
+    color: #FFFFFF;
 }
 
 .main {
@@ -328,7 +328,7 @@ form fieldset {
     justify-content: flex-end;
     align-items: center;
     height: 10vh;
-    background-color: #252525; /* Gris moyen */
+    background-color: #252525;
     padding: 10px;
 }
 
