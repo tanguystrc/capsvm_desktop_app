@@ -194,6 +194,8 @@ async function getVmList(serverName) {
                 newDiv.classList.add("selected");
 
                 document.querySelector(".vmname").innerHTML = vmName;
+                document.querySelector("#ham").classList.remove("is-active");
+                document.querySelector(".menu").classList.remove("active");
             });
             vmListContainer.appendChild(newDiv);
         });
