@@ -20,7 +20,7 @@ if (!fs.existsSync(dbPath)) {
     console.error('Erreur lors de la copie de la base de données :', err);
   }
 }
-*/
+  */
 
 const db = new Database(dbPath);
 

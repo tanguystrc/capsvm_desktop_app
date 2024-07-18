@@ -51,6 +51,29 @@ window.onload = () => {
                     document.querySelectorAll(".vm").forEach((vm) => {
                         vm.remove();
                     });
+                    const allVm = document.createElement("div");
+                    allVm.classList.add("vm", "allVm", "selected");
+                    allVm.innerHTML = "All VM";
+                    allVm.addEventListener("click", () => { 
+                        const currentlySelected = document.querySelector(".vm.selected");
+        
+                        if(currentlySelected) {
+                            currentlySelected.classList.remove("selected");
+                        }
+        
+                        allVm.classList.add("selected");
+                        if(allVm.innerHTML === "All VM") {
+                            document.querySelector(".allvm").style.display = "flex";
+                            document.querySelector(".onevm").style.display = "none";
+                        } else {
+                            document.querySelector(".allvm").style.display = "none";
+                            document.querySelector(".onevm").style.display = "flex";
+                        }
+        
+                        document.querySelector(".vmname").innerHTML = vmName;
+                    });
+                    document.querySelector(".vmlist").appendChild(allVm);
+                    document.querySelector(".allvm").style.display = "flex";
                     getVmList(server.name);
                 });
             }
@@ -192,6 +215,13 @@ async function getVmList(serverName) {
                 }
 
                 newDiv.classList.add("selected");
+                if(newDiv.innerHTML === "All VM") {
+                    document.querySelector(".allvm").style.display = "flex";
+                    document.querySelector(".onevm").style.display = "none";
+                } else {
+                    document.querySelector(".allvm").style.display = "none";
+                    document.querySelector(".onevm").style.display = "flex";
+                }
 
                 document.querySelector(".vmname").innerHTML = vmName;
             });
@@ -230,4 +260,93 @@ themeButton.addEventListener('click', () => {
         themeIcon.src = 'img/moon.png';
         themeIcon.alt = 'Dark Theme';
     }
+});
+
+async function vmAction(endPoint, vmShortName) {
+    const serverName = document.querySelector(".servname").innerHTML;
+    const server = serverInfo.server.find(s => s.name === serverName);
+
+    if (server && vmShortName) {
+        const token = btoa(server.user + ":" + server.password);
+        const url = server.ip;
+
+        try {
+            const response = await window.send_post_request.sendPostRequest(url, endPoint, token, "short_name=" + vmShortName);
+
+            if (response.statusCode === 200) {
+                document.querySelector(".vmReturnInfo").innerHTML += "> " + response.data + "<br>";
+            } else {
+                console.error("The request failed, response code: " + response.statusCode);
+            }
+        } catch (error) {
+            console.error("The request failed, response code: ", error);
+        }
+    } else {
+        console.error("Server not found or no VM selected");
+    }
+}
+
+document.querySelector("#start").addEventListener("click", async () => {
+    const vmShortName = document.querySelector(".vm.selected").innerHTML;
+    vmAction("/capsvm_api/vm/startvm/", vmShortName);
+});
+
+document.querySelector("#stop").addEventListener("click", async () => {
+    const vmShortName = document.querySelector(".vm.selected").innerHTML;
+    vmAction("/capsvm_api/vm/stopvm/", vmShortName);
+});
+
+document.querySelector("#forcestop").addEventListener("click", async () => {
+    const vmShortName = document.querySelector(".vm.selected").innerHTML;
+    vmAction("/capsvm_api/vm/forcestopvm/", vmShortName);
+});
+
+document.querySelector("#status").addEventListener("click", async () => {
+    const vmShortName = document.querySelector(".vm.selected").innerHTML;
+    vmAction("/capsvm_api/vm/statusvm/", vmShortName);
+});
+
+document.querySelector("#reset").addEventListener("click", async () => {
+    const vmShortName = document.querySelector(".vm.selected").innerHTML;
+    vmAction("/capsvm_api/vm/resetvm/", vmShortName);
+});
+
+document.querySelector("#ejectcd").addEventListener("click", async () => {
+    const vmShortName = document.querySelector(".vm.selected").innerHTML;
+    vmAction("/capsvm_api/vm/ejectcd/", vmShortName);
+});
+
+document.querySelector("#gencode").addEventListener("click", async () => {
+    const vmShortName = document.querySelector(".vm.selected").innerHTML;
+    vmAction("/capsvm_api/vm/gencodevm/", vmShortName);
+});
+
+document.querySelector("#getuuidshort").addEventListener("click", async () => {
+    const vmShortName = document.querySelector(".vm.selected").innerHTML;
+    vmAction("/capsvm_api/vm/getuuidshortvm/", vmShortName);
+});
+
+document.querySelector("#screendump").addEventListener("click", async () => {
+    const vmShortName = document.querySelector(".vm.selected").innerHTML;
+    vmAction("/capsvm_api/vm/screendumpvm/", vmShortName);
+});
+
+document.querySelector("#startallvmfo").addEventListener("click", async () => {
+    const vmShortName = document.querySelector(".vm.selected").innerHTML;
+    vmAction("/capsvm_api/vm/startallvmfo/", vmShortName);
+});
+
+document.querySelector("#stopallvmfo").addEventListener("click", async () => {
+    const vmShortName = document.querySelector(".vm.selected").innerHTML;
+    vmAction("/capsvm_api/vm/stopallvmfo/", vmShortName);
+});
+
+document.querySelector("#statusallvm").addEventListener("click", async () => {
+    const vmShortName = document.querySelector(".vm.selected").innerHTML;
+    vmAction("/capsvm_api/vm/statusallvm/", vmShortName);
+});
+
+document.querySelector("#statusvmfo").addEventListener("click", async () => {
+    const vmShortName = document.querySelector(".vm.selected").innerHTML;
+    vmAction("/capsvm_api/vm/statusvmfo/", vmShortName);
 });

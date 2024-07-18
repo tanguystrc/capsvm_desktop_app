@@ -35,13 +35,30 @@
     </div>
     <div class="main">
         <div class="actions">
-            <div class="vmname">
-                VM
+            <div class="topButtons">
+                <div class="vmname">
+                    VM
+                </div>
+                <div class="allvm">
+                    <button id="startallvmfo" class="action-button">Start all vm in fail over</button>
+                    <button id="stopallvmfo" class="action-button">Stop all vm in fail over</button>
+                    <button id="statusallvm" class="action-button">Status all vm</button>
+                    <button id="statusvmfo" class="action-button">Status all vm in fail over</button>
+                </div>
+                <div class="onevm">
+                    <button id="start" class="action-button">Start</button>
+                    <button id="forcestop" class="action-button">Force Stop</button>
+                    <button id="stop" class="action-button">Stop</button>
+                    <button id="status" class="action-button">Status</button>
+                    <button id="reset" class="action-button">Reset</button>
+                    <button id="ejectcd" class="action-button">Ejectcd</button>
+                    <button id="gencode" class="action-button">Gencode</button>
+                    <button id="getuuidshort" class="action-button">Get UUID from short name</button>
+                    <button id="screendump" class="action-button">Screen Dump</button>
+                </div>
             </div>
-            <div class="buttons">
-                <button class="action-button">Start</button>
-                <button class="action-button">Stop</button>
-                <button class="action-button">Status</button>
+            <div class="vmReturnInfo">
+
             </div>
         </div>
         <div class="right">
