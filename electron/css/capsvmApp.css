@@ -65,7 +65,7 @@ body {
     max-height: 0;
     overflow-y: auto;
     transition: max-height 0.3s ease-out;
-    background-color: #f0f0f0;
+    background-color: #3D3D3D;
     width: 15vw;
     z-index: 1;
 }
