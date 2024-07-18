@@ -204,22 +204,20 @@ async function getVmList(serverName) {
     }
 }
 
-function showPopup() {
-    document.querySelector('.overlay').classList.add('active');
-    document.querySelector('.addServerPopup').classList.add('active');
+
+
+
+function showPopup(){
+    let pop = document.querySelector("#popupcontainer");
+    pop.classList.toggle("open");
 }
 
-function hidePopup() {
-    document.querySelector('.overlay').classList.remove('active');
-    document.querySelector('.addServerPopup').classList.remove('active');
+function closePopup(){
+    console.log("test");
+    let pop = document.querySelector("#popupcontainer");
+    pop.classList.toggle("open");
 }
 
-document.querySelector('.overlay').addEventListener('click', hidePopup);
-
-document.querySelector('.newServerInfo').addEventListener('submit', function(event) {
-    event.preventDefault();
-    hidePopup();
-});
 
 const themeButton = document.querySelector('.option-button.theme');
 themeButton.addEventListener('click', () => {
