@@ -64,7 +64,6 @@ body {
     left: 0;
     max-height: 0;
     overflow-y: auto;
-    transition: max-height 0.3s ease-out;
     background-color: #3D3D3D;
     width: 15vw;
     z-index: 1;
@@ -86,8 +85,17 @@ body {
     height: 4vh;
     min-height: 40px;
     border-bottom: 1px solid #555555;
-    transition: background-color 0.3s ease-out;
+    background-color: #3D3D3D;
     color: #FFFFFF;
+    cursor: pointer;
+}
+
+.server:hover {
+    background-color: grey;
+}
+
+.server.selected {
+    background-color: grey;
 }
 
 .vms {
@@ -107,10 +115,14 @@ body {
     width: 15vw;
     margin-top: 0;
     cursor: pointer;
-    transition: background-color 0.3s ease-out;
+    background-color: #3D3D3D;
 }
 
 .vm:hover {
+    background-color: grey;
+}
+
+.vm.selected {
     background-color: grey;
 }
 
@@ -165,11 +177,6 @@ body {
     cursor: pointer;
     color: #ffffff;
     border-top: 1px solid #555555;
-}
-
-.server:hover {
-    background-color: #555555;
-    cursor: pointer;
 }
 
 .serverInfo {
@@ -292,7 +299,7 @@ form fieldset {
     flex-shrink: 0;
 }
 
-.text {
+.vmname {
     margin-bottom: 20px;
 }
 
@@ -310,7 +317,6 @@ form fieldset {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
 .action-button:hover {
@@ -387,6 +393,9 @@ img {
     z-index: 11; 
 }
 
+.light-theme .addServer {
+    border-top: 1px solid #CCCCCC;
+}
 
 .light-theme {
     background-color: #FFFFFF; 
@@ -413,6 +422,27 @@ img {
 
 .light-theme .server {
     border-bottom: 1px solid #CCCCCC;
+    background-color: #F0F0F0;
+}
+
+.light-theme .server:hover {
+    background-color: #CCC9C9;
+}
+
+.light-theme .server.selected {
+    background-color: #CCC9C9;
+}
+
+.light-theme .vm {
+    background-color: #F0F0F0;
+}
+
+.light-theme .vm:hover {
+    background-color: #CCC9C9;
+}
+
+.light-theme .vm.selected {
+    background-color: #CCC9C9;
 }
 
 .light-theme .search {

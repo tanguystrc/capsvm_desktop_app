@@ -38,11 +38,13 @@ window.onload = () => {
                 document.querySelector(".menu").appendChild(newDiv);
 
                 newDiv.addEventListener("click", () => {
-                    const servers = document.querySelector(".menu").children;
-                    for (const server of servers) {
-                        server.style.backgroundColor = "#f0f0f0";
+                    const currentlySelected = document.querySelector(".server.selected");
+
+                    if(currentlySelected) {
+                        currentlySelected.classList.remove("selected");
                     }
-                    newDiv.style.backgroundColor = "grey";
+
+                    newDiv.classList.add("selected");
                     document.querySelector(".servname").innerHTML = server.name;
                     document.querySelector(".menu").classList.remove("active");
                     document.querySelector("#ham").classList.remove("is-active");
@@ -182,14 +184,23 @@ async function getVmList(serverName) {
             const newDiv = document.createElement("div");
             newDiv.className = "vm";
             newDiv.innerHTML = vmName;
+            newDiv.addEventListener("click", () => { 
+                const currentlySelected = document.querySelector(".vm.selected");
+
+                if(currentlySelected) {
+                    currentlySelected.classList.remove("selected");
+                }
+
+                newDiv.classList.add("selected");
+
+                document.querySelector(".vmname").innerHTML = vmName;
+            });
             vmListContainer.appendChild(newDiv);
         });
     } catch (error) {
         console.error("Erreur : ", error);
     }
 }
-
-
 
 function showPopup() {
     document.querySelector('.overlay').classList.add('active');
@@ -213,10 +224,10 @@ themeButton.addEventListener('click', () => {
     document.body.classList.toggle('light-theme');
     const themeIcon = themeButton.querySelector('img');
     if (document.body.classList.contains('light-theme')) {
-        themeIcon.src = 'img/sun.png'; // Change icon to sun for light theme
+        themeIcon.src = 'img/sun.png'; 
         themeIcon.alt = 'Light Theme';
     } else {
-        themeIcon.src = 'img/moon.png'; // Change icon back to moon for dark theme
+        themeIcon.src = 'img/moon.png';
         themeIcon.alt = 'Dark Theme';
     }
 });
