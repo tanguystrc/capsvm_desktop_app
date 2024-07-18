@@ -26,7 +26,7 @@
   .hamburger.is-active .hamburger-inner,
   .hamburger.is-active .hamburger-inner::before,
   .hamburger.is-active .hamburger-inner::after {
-    background-color: #000; }
+    background-color: #ffffff; }
 
 .hamburger-box {
   width: 40px;
@@ -42,7 +42,7 @@
   .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
     width: 30px;
     height: 2px;
-    background-color: #000;
+    background-color: #ffffff;
     border-radius: 4px;
     position: absolute;
     transition-property: transform;
@@ -76,3 +76,10 @@
   .hamburger--slider.is-active .hamburger-inner::after {
     transform: translate3d(0, -20px, 0) rotate(-90deg); }
 
+.light-theme .hamburger.is-active .hamburger-inner,
+.light-theme .hamburger.is-active .hamburger-inner::before,
+.light-theme .hamburger.is-active .hamburger-inner::after {
+  background-color: #000000; }
+
+  .light-theme .hamburger-inner, .light-theme .hamburger-inner::before, .light-theme .hamburger-inner::after {
+    background-color: #000000; }
