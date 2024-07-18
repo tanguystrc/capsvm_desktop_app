@@ -13,7 +13,6 @@ contextBridge.exposeInMainWorld('get_server_status', {
     sendPostRequest: async (serverUrl, endpoint, combinedToken) => {
         try {
             let response = await ipcRenderer.invoke('status-request', serverUrl, endpoint, combinedToken);
-            console.error(response);
             return response;
         } catch (error) {
             console.error('Erreur lors de l\'appel à status-request  : ', error);
@@ -26,7 +25,6 @@ contextBridge.exposeInMainWorld('send_post_request', {
     sendPostRequest: async (serverUrl, endpoint, combinedToken, postData) => {
         try {
             let response = await ipcRenderer.invoke('send-post-request', serverUrl, endpoint, combinedToken, postData);
-            console.error(response);
             return response;
         } catch (error) {
             console.error('Erreur lors de l\'appel à send-post-request  : ', error);

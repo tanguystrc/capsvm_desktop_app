@@ -126,6 +126,18 @@ body {
     background-color: grey;
 }
 
+.vmReturnInfo {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    line-height: 1.5;
+}
+
+.light-theme .vmReturnInfo {
+    background-color: #B4B4B4;
+    color: black;
+}
+
 .search {
     display: flex;
     justify-content: center;
@@ -262,25 +274,30 @@ body {
 }
 
 .actions {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 3fr 1fr;
     width: 25vw;
     height: 100%;
     background-color: #1A1A1A;
     color: #FFFFFF;
     padding: 20px;
     overflow-y: auto;
-    flex-shrink: 0;
 }
 
 .vmname {
     margin-bottom: 20px;
 }
 
-.buttons {
-    display: flex;
+.allvm, .onevm {
+    display: none;
     flex-direction: column;
     gap: 3vh;
+    overflow-y: auto;
+    height: 60vh;
+}
+
+.buttons::-webkit-scrollbar {
+    display: none;
 }
 
 .action-button {
