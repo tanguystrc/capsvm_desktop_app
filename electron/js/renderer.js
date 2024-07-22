@@ -179,60 +179,62 @@ document
         });
     });
 
-async function getVmList(serverName) {
-    const server = serverInfo.server.find(
-        (server) => server.name === serverName
-    );
-    const token = btoa(server.user + ":" + server.password);
-    const url = server.ip;
-
-    try {
-        const vmList = await window.send_post_request.sendPostRequest(
-            url,
-            "/capsvm_api/vm/statusallvm/",
-            token,
-            ""
+    async function getVmList(serverName) {
+        const server = serverInfo.server.find(
+            (server) => server.name === serverName
         );
-
-        const vmListContainer = document.querySelector(".vmlist");
-        const regex = /Status for VM "(.*?)"/g;
-        let match;
-        const vmNames = [];
-
-        while ((match = regex.exec(vmList.data)) !== null) {
-            vmNames.push(match[1]);
-        }
-
-        vmNames.forEach((vmName) => {
-            const newDiv = document.createElement("div");
-            newDiv.className = "vm";
-            newDiv.innerHTML = vmName;
-            newDiv.addEventListener("click", () => { 
-                const currentlySelected = document.querySelector(".vm.selected");
-
-                if(currentlySelected) {
-                    currentlySelected.classList.remove("selected");
-                }
-
-                newDiv.classList.add("selected");
-                if(newDiv.innerHTML === "All VM") {
-                    document.querySelector(".allvm").style.display = "flex";
-                    document.querySelector(".onevm").style.display = "none";
-                } else {
-                    document.querySelector(".allvm").style.display = "none";
-                    document.querySelector(".onevm").style.display = "flex";
-                }
-
-                document.querySelector(".vmname").innerHTML = vmName;
-                document.querySelector("#ham").classList.remove("is-active");
-                document.querySelector(".menu").classList.remove("active");
+        const token = btoa(server.user + ":" + server.password);
+        const url = server.ip;
+    
+        try {
+            const vmList = await window.send_post_request.sendPostRequest(
+                url,
+                "/capsvm_api/vm/statusallvm/",
+                token,
+                ""
+            );
+    
+            const vmListContainer = document.querySelector(".vmlist");
+            vmListContainer.innerHTML = ''; // Clear any existing VM elements
+    
+            const regex = /Status for VM "(.*?)"/g;
+            let match;
+            const vmNames = [];
+    
+            while ((match = regex.exec(vmList.data)) !== null) {
+                vmNames.push(match[1]);
+            }
+    
+            vmNames.forEach((vmName) => {
+                const newDiv = document.createElement("div");
+                newDiv.className = "vm";
+                newDiv.innerHTML = vmName;
+                newDiv.addEventListener("click", () => {
+                    const currentlySelected = document.querySelector(".vm.selected");
+    
+                    if (currentlySelected) {
+                        currentlySelected.classList.remove("selected");
+                    }
+    
+                    newDiv.classList.add("selected");
+                    if (newDiv.innerHTML === "All VM") {
+                        document.querySelector(".allvm").style.display = "flex";
+                        document.querySelector(".onevm").style.display = "none";
+                    } else {
+                        document.querySelector(".allvm").style.display = "none";
+                        document.querySelector(".onevm").style.display = "flex";
+                    }
+    
+                    document.querySelector(".vmname").innerHTML = vmName;
+                    document.querySelector("#ham").classList.remove("is-active");
+                    document.querySelector(".menu").classList.remove("active");
+                });
+                vmListContainer.appendChild(newDiv);
             });
-            vmListContainer.appendChild(newDiv);
-        });
-    } catch (error) {
-        console.error("Erreur : ", error);
+        } catch (error) {
+            console.error("Erreur : ", error);
+        }
     }
-}
 
 
 
@@ -349,4 +351,19 @@ document.querySelector("#statusallvm").addEventListener("click", async () => {
 document.querySelector("#statusvmfo").addEventListener("click", async () => {
     const vmShortName = document.querySelector(".vm.selected").innerHTML;
     vmAction("/capsvm_api/vm/statusvmfo/", vmShortName);
+});
+
+
+document.getElementById("searchInput").addEventListener("input", function() {
+    const filter = this.value.toLowerCase();
+    const vmElements = document.querySelectorAll(".vmlist .vm");
+    
+    vmElements.forEach(vmElement => {
+        const vmName = vmElement.textContent.toLowerCase();
+        if (vmName.includes(filter)) {
+            vmElement.style.display = "flex";
+        } else {
+            vmElement.style.display = "none";
+        }
+    });
 });
