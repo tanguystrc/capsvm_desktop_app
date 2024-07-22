@@ -51,6 +51,8 @@ window.onload = () => {
                     document.querySelectorAll(".vm").forEach((vm) => {
                         vm.remove();
                     });
+                    document.querySelector(".vmSelected").innerHTML = "All VM";
+
                     const allVm = document.createElement("div");
                     allVm.classList.add("vm", "allVm", "selected");
                     allVm.innerHTML = "All VM";
@@ -70,7 +72,7 @@ window.onload = () => {
                             document.querySelector(".onevm").style.display = "flex";
                         }
         
-                        document.querySelector(".vmname").innerHTML = vmName;
+                        document.querySelector(".vmSelected").innerHTML = "All VM";
                     });
                     document.querySelector(".vmlist").appendChild(allVm);
                     document.querySelector(".allvm").style.display = "flex";
@@ -223,7 +225,7 @@ async function getVmList(serverName) {
                     document.querySelector(".onevm").style.display = "flex";
                 }
 
-                document.querySelector(".vmname").innerHTML = vmName;
+                document.querySelector(".vmSelected").innerHTML = vmName;
                 document.querySelector("#ham").classList.remove("is-active");
                 document.querySelector(".menu").classList.remove("active");
             });
@@ -262,6 +264,13 @@ themeButton.addEventListener('click', () => {
     }
 });
 
+function toggleButtons(enable) {
+    const buttons = document.querySelectorAll("#start, #stop, #forcestop, #status, #reset, #ejectcd, #gencode, #getuuidshort, #screendump, #startallvmfo, #stopallvmfo, #statusallvm, #statusvmfo");
+    buttons.forEach(button => {
+        button.disabled = !enable;
+    });
+}
+
 async function vmAction(endPoint, vmShortName) {
     const serverName = document.querySelector(".servname").innerHTML;
     const server = serverInfo.server.find(s => s.name === serverName);
@@ -270,16 +279,22 @@ async function vmAction(endPoint, vmShortName) {
         const token = btoa(server.user + ":" + server.password);
         const url = server.ip;
 
+        toggleButtons(false);
+
         try {
             const response = await window.send_post_request.sendPostRequest(url, endPoint, token, "short_name=" + vmShortName);
 
             if (response.statusCode === 200) {
-                document.querySelector(".vmReturnInfo").innerHTML += "> " + response.data + "<br>";
+                const vmReturnInfo = document.querySelector(".vmReturnInfo");
+                vmReturnInfo.innerHTML += "> " + response.data + "<br><br>";
+                vmReturnInfo.lastElementChild.scrollIntoView({ behavior: 'smooth' });
             } else {
                 console.error("The request failed, response code: " + response.statusCode);
             }
         } catch (error) {
             console.error("The request failed, response code: ", error);
+        } finally {
+            toggleButtons(true);
         }
     } else {
         console.error("Server not found or no VM selected");

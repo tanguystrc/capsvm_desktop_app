@@ -131,6 +131,7 @@ body {
     color: white;
     padding: 10px;
     line-height: 1.5;
+    overflow-y: auto;
 }
 
 .light-theme .vmReturnInfo {
@@ -286,6 +287,8 @@ body {
 
 .vmname {
     margin-bottom: 20px;
+    font-size: larger;
+    font-weight: bold;
 }
 
 .allvm, .onevm {
@@ -294,6 +297,10 @@ body {
     gap: 3vh;
     overflow-y: auto;
     height: 60vh;
+}
+
+.vmReturnInfo::-webkit-scrollbar {
+    display: none;
 }
 
 .buttons::-webkit-scrollbar {
