@@ -150,3 +150,25 @@ ipcMain.on("add-server", (event, arg) => {
       event.reply("add-server-reply", { error: err.message });
     }
 });
+
+ipcMain.on("delete-server", (event, arg) => {
+    try {
+        db.prepare("DELETE FROM server WHERE name = ?").run(arg.name);
+        event.reply("delete-server-reply", {success: true});
+    } catch(err) {
+      console.error(err.message);
+      event.reply("delete-server-reply", { error: err.message });
+    }
+});
+
+ipcMain.on("update-server", (event, arg) => {
+    try {
+        db.prepare(
+            "UPDATE server SET name = ?, ip = ?, user = ?, password = ? WHERE name = ?"
+        ).run(arg.name, arg.ip, arg.username, arg.password, arg.lastName);
+        event.reply("update-server-reply", {success: true});
+    } catch(err) {
+      console.error(err.message);
+      event.reply("update-server-reply", { error: err.message });
+    }
+});
