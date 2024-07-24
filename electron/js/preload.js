@@ -15,22 +15,10 @@ contextBridge.exposeInMainWorld("sqlite_server", {
         ipcRenderer.on("update-server-reply", (event, arg) => callback(arg)),
 });
 
-contextBridge.exposeInMainWorld('get_server_status', {
-    sendPostRequest: async (serverUrl, endpoint, combinedToken) => {
-        try {
-            let response = await ipcRenderer.invoke('status-request', serverUrl, endpoint, combinedToken);
-            return response;
-        } catch (error) {
-            console.error('Erreur lors de l\'appel à status-request  : ', error);
-            throw error;
-        }
-    }
-});
-
 contextBridge.exposeInMainWorld('send_post_request', {
-    sendPostRequest: async (serverUrl, endpoint, combinedToken, postData) => {
+    sendPostRequest: async (serverUrl, combinedToken, postData) => {
         try {
-            let response = await ipcRenderer.invoke('send-post-request', serverUrl, endpoint, combinedToken, postData);
+            let response = await ipcRenderer.invoke('send-post-request', serverUrl, combinedToken, postData);
             return response;
         } catch (error) {
             console.error('Erreur lors de l\'appel à send-post-request  : ', error);

@@ -85,10 +85,10 @@ window.onload = () => {
 
 async function getServerStatus(serverUrl, combinedToken, status, tooltip) {
     try {
-        const statusCode = await window.get_server_status.sendPostRequest(
+        const statusCode = await window.send_post_request.sendPostRequest(
             serverUrl,
-            "/capsvm_api/getgroup/",
-            combinedToken
+            combinedToken,
+            "function=getgroup",
         );
         if (statusCode.statusCode === 200) {
             status.style.backgroundColor = "green";
@@ -191,9 +191,8 @@ async function getVmList(serverName) {
     try {
         const vmList = await window.send_post_request.sendPostRequest(
             url,
-            "/capsvm_api/vm/statusallvm/",
             token,
-            ""
+            "function=statusallvm"
         );
 
         const vmListContainer = document.querySelector(".vmlist");
@@ -271,7 +270,7 @@ function toggleButtons(enable) {
     });
 }
 
-async function vmAction(endPoint, vmShortName) {
+async function vmAction(function_name, vmShortName) {
     const serverName = document.querySelector(".servname").innerHTML;
     const server = serverInfo.server.find(s => s.name === serverName);
 
@@ -282,7 +281,7 @@ async function vmAction(endPoint, vmShortName) {
         toggleButtons(false);
 
         try {
-            const response = await window.send_post_request.sendPostRequest(url, endPoint, token, "short_name=" + vmShortName);
+            const response = await window.send_post_request.sendPostRequest(url, token, "function=" + function_name + "&short_name=" + vmShortName);
 
             if (response.statusCode === 200) {
                 const vmReturnInfo = document.querySelector(".vmReturnInfo");
@@ -303,67 +302,67 @@ async function vmAction(endPoint, vmShortName) {
 
 document.querySelector("#start").addEventListener("click", async () => {
     const vmShortName = document.querySelector(".vm.selected").innerHTML;
-    vmAction("/capsvm_api/vm/startvm/", vmShortName);
+    vmAction("startvm", vmShortName);
 });
 
 document.querySelector("#stop").addEventListener("click", async () => {
     const vmShortName = document.querySelector(".vm.selected").innerHTML;
-    vmAction("/capsvm_api/vm/stopvm/", vmShortName);
+    vmAction("stopvm", vmShortName);
 });
 
 document.querySelector("#forcestop").addEventListener("click", async () => {
     const vmShortName = document.querySelector(".vm.selected").innerHTML;
-    vmAction("/capsvm_api/vm/forcestopvm/", vmShortName);
+    vmAction("forcestopvm", vmShortName);
 });
 
 document.querySelector("#status").addEventListener("click", async () => {
     const vmShortName = document.querySelector(".vm.selected").innerHTML;
-    vmAction("/capsvm_api/vm/statusvm/", vmShortName);
+    vmAction("statusvm", vmShortName);
 });
 
 document.querySelector("#reset").addEventListener("click", async () => {
     const vmShortName = document.querySelector(".vm.selected").innerHTML;
-    vmAction("/capsvm_api/vm/resetvm/", vmShortName);
+    vmAction("resetvm", vmShortName);
 });
 
 document.querySelector("#ejectcd").addEventListener("click", async () => {
     const vmShortName = document.querySelector(".vm.selected").innerHTML;
-    vmAction("/capsvm_api/vm/ejectcd/", vmShortName);
+    vmAction("ejectcd", vmShortName);
 });
 
 document.querySelector("#gencode").addEventListener("click", async () => {
     const vmShortName = document.querySelector(".vm.selected").innerHTML;
-    vmAction("/capsvm_api/vm/gencodevm/", vmShortName);
+    vmAction("gencodevm", vmShortName);
 });
 
 document.querySelector("#getuuidshort").addEventListener("click", async () => {
     const vmShortName = document.querySelector(".vm.selected").innerHTML;
-    vmAction("/capsvm_api/vm/getuuidshortvm/", vmShortName);
+    vmAction("getuuidshortvm", vmShortName);
 });
 
 document.querySelector("#screendump").addEventListener("click", async () => {
     const vmShortName = document.querySelector(".vm.selected").innerHTML;
-    vmAction("/capsvm_api/vm/screendumpvm/", vmShortName);
+    vmAction("screendumpvm", vmShortName);
 });
 
 document.querySelector("#startallvmfo").addEventListener("click", async () => {
     const vmShortName = document.querySelector(".vm.selected").innerHTML;
-    vmAction("/capsvm_api/vm/startallvmfo/", vmShortName);
+    vmAction("startallvmfo", vmShortName);
 });
 
 document.querySelector("#stopallvmfo").addEventListener("click", async () => {
     const vmShortName = document.querySelector(".vm.selected").innerHTML;
-    vmAction("/capsvm_api/vm/stopallvmfo/", vmShortName);
+    vmAction("stopallvmfo", vmShortName);
 });
 
 document.querySelector("#statusallvm").addEventListener("click", async () => {
     const vmShortName = document.querySelector(".vm.selected").innerHTML;
-    vmAction("/capsvm_api/vm/statusallvm/", vmShortName);
+    vmAction("statusallvm", vmShortName);
 });
 
 document.querySelector("#statusvmfo").addEventListener("click", async () => {
     const vmShortName = document.querySelector(".vm.selected").innerHTML;
-    vmAction("/capsvm_api/vm/statusvmfo/", vmShortName);
+    vmAction("statusvmfo", vmShortName);
 });
 
 

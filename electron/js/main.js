@@ -68,47 +68,14 @@ ipcMain.on("get-server", (event, arg) => {
 });
 
 ipcMain.handle(
-    "status-request",
-    async (event, serverUrl, endpoint, combinedToken) => {
-        return new Promise((resolve, reject) => {
-            const postData = "";
-
-            const options = {
-                hostname: serverUrl,
-                port: 443,
-                path: endpoint,
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    Authorization: "Basic " + combinedToken,
-                    "Content-Length": Buffer.byteLength(postData),
-                },
-            };
-
-            const req = https.request(options, (res) => {
-                const statusCode = res.statusCode;
-                resolve({ statusCode });
-            });
-
-            req.on("error", (error) => {
-                reject(error);
-            });
-
-            req.write(postData);
-            req.end();
-        });
-    }
-);
-
-ipcMain.handle(
     "send-post-request",
-    async (event, serverUrl, endpoint, combinedToken, postData) => {
+    async (event, serverUrl, combinedToken, postData) => {
         return new Promise((resolve, reject) => {
 
             const options = {
                 hostname: serverUrl,
                 port: 443,
-                path: endpoint,
+                path: "/capsvm_api/",
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
