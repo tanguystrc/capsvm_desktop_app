@@ -119,7 +119,6 @@ document.querySelector(".addServer").addEventListener("click", function () {
 document
     .querySelector(".newServerInfo")
     .addEventListener("submit", function (event) {
-        event.preventDefault();
 
         const serverName = document.querySelector(
             'input[name="serverName"]'
@@ -249,6 +248,16 @@ function closePopup(){
     pop.classList.toggle("open");
 }
 
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        const popupOverlay = document.getElementById('popupOverlay');
+        if (popupOverlay.classList.contains('active')) {
+            event.preventDefault();
+            document.getElementById('serverForm').submit();
+        }
+    }
+});
 
 const themeButton = document.querySelector('.option-button.theme');
 themeButton.addEventListener('click', () => {
