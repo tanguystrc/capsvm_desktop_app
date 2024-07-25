@@ -130,6 +130,7 @@ ipcMain.on("delete-server", (event, arg) => {
 
 ipcMain.on("update-server", (event, arg) => {
     try {
+        console.log(arg);
         db.prepare(
             "UPDATE server SET name = ?, ip = ?, user = ?, password = ? WHERE name = ?"
         ).run(arg.name, arg.ip, arg.username, arg.password, arg.lastName);

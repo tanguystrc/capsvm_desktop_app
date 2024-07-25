@@ -1,12 +1,30 @@
 var serverInfo;
 
 window.onload = () => {
+    getServer();
+};
+
+function getServer() {
     window.sqlite_server.getServers();
     window.sqlite_server.onServersGet((data) => {
         if (data.error) {
             console.error(data.error);
         } else {
             serverInfo = data;
+
+            const menuElement = document.querySelector(".menu");
+            menuElement.innerHTML = "";
+
+            const addServer = document.createElement("div");
+            addServer.className = "server addServer";
+            addServer.innerHTML = "Add a Server";
+            addServer.addEventListener("click", function () {
+                showPopup();
+                document.querySelector(".addServerPopup").style.display = "block";
+            });
+
+            menuElement.appendChild(addServer);
+
             for (const server of data.server) {
                 const newDiv = document.createElement("div");
                 newDiv.className = "server";
@@ -22,6 +40,23 @@ window.onload = () => {
                 const status = document.createElement("div");
                 status.className = "status";
 
+                const img = document.createElement("img");
+                img.src = "img/modify.png";
+                img.className = "edit";
+                img.addEventListener("click", function (event) {
+                    event.stopPropagation();
+                    showPopup();
+                    document.querySelector(".addServerPopup").classList.add("editServerPopup");
+                    document.querySelector(".addServerPopup").style.display = "block";
+                    document.querySelector('input[name="serverName"]').value = server.name;
+                    document.querySelector('input[name="serverIp"]').value = server.ip;
+                    document.querySelector('input[name="serverUsername"]').value = server.user;
+                    document.querySelector('input[name="serverPassword"]').value = server.password;
+                    document.querySelector(".result").value = "Modify";
+                    document.querySelector(".remove").style.display = "flex";
+                    img.parentElement.parentElement.classList.add("selected");
+                });
+
                 const tooltip = document.createElement("div");
                 tooltip.className = "tooltip";
                 tooltip.innerHTML = "Trying to connect";
@@ -33,6 +68,7 @@ window.onload = () => {
                 getServerStatus(url, token, status, tooltip);
 
                 serverStatus.appendChild(status);
+                serverStatus.appendChild(img);
                 newDiv.appendChild(serverStatus);
 
                 document.querySelector(".menu").appendChild(newDiv);
@@ -81,7 +117,7 @@ window.onload = () => {
             }
         }
     });
-};
+}
 
 async function getServerStatus(serverUrl, combinedToken, status, tooltip) {
     try {
@@ -99,7 +135,7 @@ async function getServerStatus(serverUrl, combinedToken, status, tooltip) {
         } else {
             status.style.backgroundColor = "black";
             tooltip.innerHTML = "Server is down";
-        }
+        }   
     } catch (error) {
         status.style.backgroundColor = "black";
         tooltip.innerHTML = "Server is down";
@@ -112,73 +148,59 @@ document.querySelector("#ham").addEventListener("click", function () {
     document.querySelector(".menu").classList.toggle("active");
 });
 
-document.querySelector(".addServer").addEventListener("click", function () {
-    document.querySelector(".addServerPopup").style.display = "block";
-});
-
-document
-    .querySelector(".newServerInfo")
-    .addEventListener("submit", function (event) {
+document.querySelector(".newServerInfo").addEventListener("submit", function (event) {
         event.preventDefault();
 
         const serverName = document.querySelector(
             'input[name="serverName"]'
         ).value;
-        const serverIp = document.querySelector('input[name="serverIp"]').value;
+        const serverIp = document.querySelector(
+            'input[name="serverIp"]'
+        ).value;
         const serverUsername = document.querySelector(
             'input[name="serverUsername"]'
         ).value;
         const serverPassword = document.querySelector(
             'input[name="serverPassword"]'
         ).value;
+
         document.querySelector(".addServerPopup").style.display = "none";
 
-        window.sqlite_server.addServer(
-            serverName,
-            serverIp,
-            serverUsername,
-            serverPassword
-        );
-        window.sqlite_server.onServerAdd((data) => {
-            if (data.error) {
-                console.log(data.error);
-            } else {
-                serverInfo.server.push({
-                    name: serverName,
-                    ip: serverIp,
-                    user: serverUsername,
-                    password: serverPassword,
-                });
-                const newDiv = document.createElement("div");
-                newDiv.className = "server";
+        if(document.querySelector(".addServerPopup").classList.contains("editServerPopup")) {
+            const lastName = document.querySelector(".server.selected .serverInfo").innerHTML.split(" - ")[0];
+            window.sqlite_server.updateServer(
+                serverName,
+                serverIp,
+                serverUsername,
+                serverPassword,
+                lastName
+            );
 
-                const serverInfo = document.createElement("div");
-                serverInfo.innerHTML = serverName + " - " + serverIp;
-                serverInfo.className = "serverInfo";
-                newDiv.appendChild(serverInfo);
-
-                const serverStatus = document.createElement("div");
-                serverStatus.className = "serverStatus";
-
-                const status = document.createElement("div");
-                status.className = "status";
-
-                const tooltip = document.createElement("div");
-                tooltip.className = "tooltip";
-                tooltip.innerHTML = "Trying to connect";
-                status.appendChild(tooltip);
-
-                const token = btoa(serverUsername + ":" + serverPassword);
-                const url = serverIp;
-
-                getServerStatus(url, token, status, tooltip);
-
-                serverStatus.appendChild(status);
-                newDiv.appendChild(serverStatus);
-
-                document.querySelector(".menu").appendChild(newDiv);
-            }
-        });
+            window.sqlite_server.onServerUpdate((data) => {
+                if (data.error) {
+                    console.log(data.error);
+                } else {
+                    getServer();
+                }
+            });
+            document.querySelector(".addServerPopup").classList.remove("editServerPopup");
+            document.querySelector(".result").value = "Add";
+            closePopup();
+        } else {
+            window.sqlite_server.addServer(
+                serverName,
+                serverIp,
+                serverUsername,
+                serverPassword
+            );
+            window.sqlite_server.onServerAdd((data) => {
+                if (data.error) {
+                    console.log(data.error);
+                } else {
+                    getServer();
+                }
+            });
+        }
     });
 
 async function getVmList(serverName) {
@@ -235,18 +257,15 @@ async function getVmList(serverName) {
     }
 }
 
-
-
-
 function showPopup(){
     let pop = document.querySelector("#popupcontainer");
     pop.classList.toggle("open");
 }
 
 function closePopup(){
-    console.log("test");
     let pop = document.querySelector("#popupcontainer");
     pop.classList.toggle("open");
+    document.querySelector(".remove").style.display = "none";
 }
 
 
@@ -378,4 +397,17 @@ document.getElementById("searchInput").addEventListener("input", function() {
             vmElement.style.display = "none";
         }
     });
+});
+
+document.querySelector(".remove").addEventListener("click", function() {
+    const serverName = document.querySelector(".server.selected").querySelector(".serverInfo").innerHTML.split(" - ")[0];
+    window.sqlite_server.deleteServer(serverName);
+    window.sqlite_server.onServerDelete((data) => {
+        if (data.error) {
+            console.log(data.error);
+        } else {
+            getServer();
+        }
+    });
+    closePopup();
 });
