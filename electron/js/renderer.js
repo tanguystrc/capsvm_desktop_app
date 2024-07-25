@@ -200,6 +200,7 @@ document.querySelector(".newServerInfo").addEventListener("submit", function (ev
                     getServer();
                 }
             });
+            closePopup();
         }
     });
 
@@ -267,17 +268,6 @@ function closePopup(){
     pop.classList.toggle("open");
     document.querySelector(".remove").style.display = "none";
 }
-
-
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        const popupOverlay = document.getElementById('popupOverlay');
-        if (popupOverlay.classList.contains('active')) {
-            event.preventDefault();
-            document.getElementById('serverForm').submit();
-        }
-    }
-});
 
 const themeButton = document.querySelector('.option-button.theme');
 themeButton.addEventListener('click', () => {
