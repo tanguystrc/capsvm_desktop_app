@@ -23,7 +23,6 @@
             </div>
         </div>
         <div class="menu">
-            <div class="server addServer" onclick="showPopup()">Add a server</div>
         </div>
         <div class="vms">
             <div class="search">
@@ -75,9 +74,9 @@
     <div id="popupcontainer" class="popupcontainer">
         <div class="addServerPopup">
             <div class="closeb">
-                <button class="close" onclick="closePopup()">Close</button>
+                <button class="close" onclick="closePopup()"><img src="img/cross.png" alt="close"></button>
             </div>
-            <form class="newServerInfo" onSubmit="JavaScript:closePopup()">
+            <form class="newServerInfo" onsubmit="Javascript:closePopup()">
                 <div class="fields">
                     <fieldset class="set">
                         <legend>Server name</legend>
@@ -96,10 +95,13 @@
 
                     <fieldset>
                         <legend>password</legend>
-                        <input type="password" id="serverPassword" name="serverPassword" required>
+                        <input type="text" id="serverPassword" name="serverPassword" required>
                     </fieldset>
                 </div>
-                <input class="result" type="submit" name="submit" id="submit" value="Add">
+                <div class="endForm">
+                    <input class="result" type="submit" name="submit" id="submit" value="Add">
+                    <div class="remove"><img src="img/bin.png" alt="remove"></div>
+                </div>
             </form>
         </div>
     </div>
