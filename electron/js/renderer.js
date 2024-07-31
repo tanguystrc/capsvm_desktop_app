@@ -1,3 +1,12 @@
+import RFB from '@novnc/novnc';
+
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.term');
+    const url = 'ws://192.168.1.19:5700';
+  
+    const vnc = new RFB(container, url, {});
+  });
+
 var serverInfo;
 
 window.onload = () => {
@@ -20,7 +29,11 @@ function getServer() {
             addServer.innerHTML = "Add a Server";
             addServer.addEventListener("click", function () {
                 showPopup();
-                document.querySelector(".addServerPopup").style.display = "block";
+                document.querySelector(".addServerPopup").style.display = "block";                    
+                document.querySelector('input[name="serverName"]').value = "";
+                document.querySelector('input[name="serverIp"]').value ="";
+                document.querySelector('input[name="serverUsername"]').value = "";
+                document.querySelector('input[name="serverPassword"]').value = "";
             });
 
             menuElement.appendChild(addServer);
@@ -54,7 +67,6 @@ function getServer() {
                     document.querySelector('input[name="serverPassword"]').value = server.password;
                     document.querySelector(".result").value = "Modify";
                     document.querySelector(".remove").style.display = "flex";
-                    img.parentElement.parentElement.classList.add("selected");
                 });
 
                 const tooltip = document.createElement("div");

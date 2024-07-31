@@ -5,7 +5,7 @@ const Database = require("better-sqlite3");
 const https = require("https");
 const fs = require("fs");
 const path = require("path");
-
+app.disableHardwareAcceleration();
 const dbPath = path.join(app.getAppPath(), "capsvm.sqlite"); // pour npm start
 
 /*
@@ -31,6 +31,7 @@ const createWindow = () => {
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
             nodeIntegration: false,
+            enableRemoteModule: false,
             contextIsolation: true,
         },
     });
