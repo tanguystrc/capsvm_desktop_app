@@ -21,8 +21,6 @@ contextBridge.exposeInMainWorld('send_post_request', {
             let response = await ipcRenderer.invoke('send-post-request', serverUrl, combinedToken, postData);
             return response;
         } catch (error) {
-            console.error('Erreur lors de l\'appel à send-post-request  : ', error);
-            throw error;
         }
     }
 });
